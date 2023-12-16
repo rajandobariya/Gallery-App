@@ -91,8 +91,12 @@ public class VideoActivity extends AppCompatActivity {
 
 
         if (folderList.size() == 0) {
+            binding.nodata.setVisibility(View.VISIBLE);
+            binding.galleryRecyclerview.setVisibility(View.GONE);
+            binding.galleryTotalImages.setText("Total items: " + folderList.size());
         } else {
-
+            binding.nodata.setVisibility(View.GONE);
+            binding.galleryRecyclerview.setVisibility(View.VISIBLE);
             binding.galleryRecyclerview.setLayoutManager(new GridLayoutManager(this, 2));
             binding.galleryRecyclerview.setHasFixedSize(true);
             videoAlbumAdapter = new VideoAlbumAdapter(this, folderList);
