@@ -21,6 +21,7 @@ import android.view.View;
 
 import com.example.galleryapp.databinding.ActivityStartBinding;
 import com.example.galleryapp.folder.FolderImageActivity;
+import com.example.galleryapp.video.AllVideoActivity;
 import com.example.galleryapp.video.VideoActivity;
 import com.example.galleryapp.whatsapp.WhatsappImageActivity;
 
@@ -54,7 +55,7 @@ public class StartActivity extends AppCompatActivity {
                 } else {
                     startActivity(new Intent(StartActivity.this, AllphotoActivity.class));
                 }
-            }else {
+            } else {
                 if (checkPermissions()) {
                     startActivity(new Intent(StartActivity.this, AllphotoActivity.class));
                 } else {
@@ -71,7 +72,7 @@ public class StartActivity extends AppCompatActivity {
                     } else {
                         startActivity(new Intent(StartActivity.this, WhatsappImageActivity.class));
                     }
-                }else {
+                } else {
                     if (checkPermissions()) {
                         startActivity(new Intent(StartActivity.this, WhatsappImageActivity.class));
                     } else {
@@ -89,7 +90,7 @@ public class StartActivity extends AppCompatActivity {
                     } else {
                         startActivity(new Intent(StartActivity.this, FolderImageActivity.class));
                     }
-                }else {
+                } else {
                     if (checkPermissions()) {
                         startActivity(new Intent(StartActivity.this, FolderImageActivity.class));
                     } else {
@@ -107,9 +108,27 @@ public class StartActivity extends AppCompatActivity {
                     } else {
                         startActivity(new Intent(StartActivity.this, VideoActivity.class));
                     }
-                }else {
+                } else {
                     if (checkPermissions()) {
                         startActivity(new Intent(StartActivity.this, VideoActivity.class));
+                    } else {
+                        requestPermissions();
+                    }
+                }
+            }
+        });
+        binding.allvideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    if (!allPermissionResultCheck33()) {
+                        requestPermissionStorageImages();
+                    } else {
+                        startActivity(new Intent(StartActivity.this, AllVideoActivity.class));
+                    }
+                } else {
+                    if (checkPermissions()) {
+                        startActivity(new Intent(StartActivity.this, AllVideoActivity.class));
                     } else {
                         requestPermissions();
                     }
@@ -234,9 +253,9 @@ public class StartActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == STORAGE_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                Log.e(TAG, "onRequestPermissionsResult: "+" Permission Granted ");
+                Log.e(TAG, "onRequestPermissionsResult: " + " Permission Granted ");
             } else {
-                Log.e(TAG, "onRequestPermissionsResult: "+" Permission Denied ");
+                Log.e(TAG, "onRequestPermissionsResult: " + " Permission Denied ");
             }
         }
     }

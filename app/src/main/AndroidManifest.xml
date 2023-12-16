@@ -32,6 +32,9 @@
         android:theme="@style/Theme.GalleryApp"
         tools:targetApi="31">
         <activity
+            android:name=".video.AllVideoActivity"
+            android:exported="false" />
+        <activity
             android:name=".video.VideoPlayActivity"
             android:exported="false" />
         <activity

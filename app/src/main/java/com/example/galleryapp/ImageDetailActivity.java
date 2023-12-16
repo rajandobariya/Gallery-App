@@ -23,7 +23,7 @@ public class ImageDetailActivity extends AppCompatActivity {
 
     ZoomageView image;
     String image_file;
-    ImageView play;
+
 
 
     @Override
@@ -45,7 +45,6 @@ public class ImageDetailActivity extends AppCompatActivity {
                 image.setVisibility(View.VISIBLE);
                 if (file.exists()) {
                     Glide.with(this).load(image_file).into(image);
-                    play.setVisibility(View.GONE);
                 }
                 break;
 
