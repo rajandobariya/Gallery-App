@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.galleryapp.ImageDetailActivity;
 import com.example.galleryapp.R;
+import com.example.galleryapp.video.VideoPlayActivity;
 import com.example.galleryapp.video.model.VideoAlbum;
 
 import java.util.ArrayList;
@@ -57,10 +58,13 @@ public class VideoViewAdapter extends RecyclerView.Adapter<VideoViewAdapter.Vide
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ImageDetailActivity.class);
+                Intent intent = new Intent(context, VideoPlayActivity.class);
                 intent.putExtra("video", videoAlbums.get(int_position).getAl_videopath().get(position));
-                intent.putExtra("id",1);
                 context.startActivity(intent);
+//                Intent intent = new Intent(context, ImageDetailActivity.class);
+////                intent.putExtra("video", videoAlbums.get(int_position).getAl_videopath().get(position));
+//                intent.putExtra("id",1);
+//                context.startActivity(intent);
 
             }
         });
