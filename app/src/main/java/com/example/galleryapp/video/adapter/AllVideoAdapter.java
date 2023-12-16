@@ -16,7 +16,7 @@ import com.example.galleryapp.ImageDetailActivity;
 import com.example.galleryapp.R;
 import com.example.galleryapp.video.VideoPlayActivity;
 
-import java.io.File;
+
 import java.util.ArrayList;
 
 public class AllVideoAdapter extends RecyclerView.Adapter<AllVideoAdapter.ViewHolder> {
@@ -39,11 +39,7 @@ public class AllVideoAdapter extends RecyclerView.Adapter<AllVideoAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        File image_file = new File(images_list.get(position));
-
-        if (image_file.exists()) {
-            Glide.with(context).load(image_file).into(holder.image);
-        }
+        Glide.with(context).load(images_list.get(position)).into(holder.image);
 
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override

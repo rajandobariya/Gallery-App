@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.galleryapp.ImageDetailActivity;
 import com.example.galleryapp.R;
 
-import java.io.File;
+
 import java.util.ArrayList;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHolder> {
@@ -38,12 +38,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        File image_file = new File(images_list.get(position));
 
-        if (image_file.exists()) {
-            Glide.with(context).load(image_file).into(holder.image);
-        }
-
+        Glide.with(context).load(images_list.get(position)).into(holder.image);
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

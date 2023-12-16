@@ -63,6 +63,7 @@ public class AllphotoActivity extends AppCompatActivity {
     }
 
     private void getImage() {
+        image_list.clear();
         boolean SDCard = Environment.getExternalStorageState().equals(MEDIA_MOUNTED);
         if (SDCard) {
             final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};
