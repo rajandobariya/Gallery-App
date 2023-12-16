@@ -1,9 +1,14 @@
 package com.example.galleryapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.MediaController;
+import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,19 +23,53 @@ public class ImageDetailActivity extends AppCompatActivity {
 
     ZoomageView image;
     String image_file;
+    ImageView play;
+    VideoView videoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_detail);
 
+
+
         image_file = getIntent().getStringExtra("image_file");
         File file = new File(image_file);
         image = findViewById(R.id.image);
+        play = findViewById(R.id.playButton);
+        videoView = findViewById(R.id.video);
 
-        if (file.exists()) {
-            Glide.with(this).load(image_file).into(image);
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("id", 0);
+        switch (id){
+            case 0:
+                videoView.setVisibility(View.GONE);
+                image.setVisibility(View.VISIBLE);
+                if (file.exists()) {
+                    Glide.with(this).load(image_file).into(image);
+                    play.setVisibility(View.GONE);
+                }
+                break;
+            case 1:
+                image.setVisibility(View.GONE);
+                videoView.setVisibility(View.VISIBLE);
+                String path = getIntent().getStringExtra("video");
+
+                MediaController mediaController = new MediaController(this, false);
+                videoView.setOnPreparedListener(mp -> {
+//            mp.start();
+                    mediaController.show(0);
+                    mp.setLooping(true);
+                });
+                videoView.setMediaController(mediaController);
+                mediaController.setMediaPlayer(videoView);
+                videoView.requestFocus();
+                videoView.setVideoURI(Uri.parse(path));
+
+                play.setVisibility(View.VISIBLE);
+                break;
         }
+
 
     }
 }

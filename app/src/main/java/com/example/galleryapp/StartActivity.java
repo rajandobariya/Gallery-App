@@ -21,6 +21,7 @@ import android.view.View;
 
 import com.example.galleryapp.databinding.ActivityStartBinding;
 import com.example.galleryapp.folder.FolderImageActivity;
+import com.example.galleryapp.video.VideoActivity;
 import com.example.galleryapp.whatsapp.WhatsappImageActivity;
 
 public class StartActivity extends AppCompatActivity {
@@ -91,6 +92,24 @@ public class StartActivity extends AppCompatActivity {
                 }else {
                     if (checkPermissions()) {
                         startActivity(new Intent(StartActivity.this, FolderImageActivity.class));
+                    } else {
+                        requestPermissions();
+                    }
+                }
+            }
+        });
+        binding.video.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    if (!allPermissionResultCheck33()) {
+                        requestPermissionStorageImages();
+                    } else {
+                        startActivity(new Intent(StartActivity.this, VideoActivity.class));
+                    }
+                }else {
+                    if (checkPermissions()) {
+                        startActivity(new Intent(StartActivity.this, VideoActivity.class));
                     } else {
                         requestPermissions();
                     }
