@@ -70,7 +70,6 @@ public class ImageDetailActivity extends AppCompatActivity {
         BitmapDrawable bitmapDrawable = (BitmapDrawable) image.getDrawable();
         Bitmap bitmap = bitmapDrawable.getBitmap();
 
-        // Save the Bitmap to a temporary file
         File cachePath = new File(getCacheDir(), "images");
         cachePath.mkdirs();
         File imageFile = new File(cachePath, "shared_image.png");
@@ -82,22 +81,16 @@ public class ImageDetailActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        // Get the Uri of the temporary file
         Uri contentUri = FileProvider.getUriForFile(
                 ImageDetailActivity.this,
                 "com.example.galleryapp.fileprovider",
                 imageFile
         );
 
-        // Create an Intent to share the image
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("image/*");
         shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
-
-        // Grant read permission to the receiving app
         shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-        // Start the sharing activity
         startActivity(Intent.createChooser(shareIntent, "Share image"));
     }
 }
